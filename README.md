@@ -6,8 +6,23 @@ Serverless API that mints short-lived JWT tokens for the [Kling](https://klingai
 
 | Method | Path | Response |
 |--------|------|----------|
-| `GET` | `/kling-token` | `{ "token": "<jwt>" }` |
+| `GET` | `/kling-token` | `{ "token", "exp", "expires_at", "expires_in" }` |
 | `GET` | `/api/kling-token` | Same (direct serverless route) |
+
+Example response:
+
+```json
+{
+  "token": "eyJ...",
+  "exp": 1780503589,
+  "expires_at": "2026-06-03T16:19:49.000Z",
+  "expires_in": 1800
+}
+```
+
+- `exp` — Unix timestamp (matches JWT `exp` claim)
+- `expires_at` — ISO 8601 time for Supabase `timestamptz`
+- `expires_in` — seconds until expiry (30 minutes)
 
 ## Environment variables
 
